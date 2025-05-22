@@ -1,0 +1,35 @@
+name: Expo EAS CI/CD Pipeline
+
+on:
+  push:
+    branches:
+      - main  # Or replace with your branch name
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 📥 Checkout code
+        uses: actions/checkout@v3
+
+      - name: 🧰 Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+
+      - name: 📦 Install dependencies
+        run: npm install
+
+      - name: ⚙️ Install EAS CLI
+        run: npm install -g eas-cli
+
+      - name: 🔐 Authenticate with Expo
+        run: eas whoami
+        env:
+          EXPO_TOKEN: ${{ secrets.EXPO_TOKEN }}
+
+      - name: 🛠️ Start EAS build
+        run: eas build --platform all --non-interactive --profile production
+        env:
+          EXPO_TOKEN: ${{ secrets.EXPO_TOKEN }}
