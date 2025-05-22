@@ -3,7 +3,7 @@ name: Expo EAS CI/CD Pipeline
 on:
   push:
     branches:
-      - main  # Or replace with your branch name
+      - master  # Or replace with your branch name
 
 jobs:
   build:
