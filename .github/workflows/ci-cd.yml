@@ -24,8 +24,8 @@ jobs:
     - name: Install EAS CLI
       run: npm install -g eas-cli
 
-    - name: EAS Build for Android and iOS
+    - name: EAS Build for Android only
       env:
         EXPO_TOKEN: ${{ secrets.EXPO_TOKEN }}
       run: |
-        eas build --platform all --non-interactive --profile production
+         eas build --platform android --non-interactive --profile production
